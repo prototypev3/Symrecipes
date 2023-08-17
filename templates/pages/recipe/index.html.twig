@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymRecipe - Mes recettes
+{% endblock %}
+
+
+{% block body %}
+	{% include 'components/_search_data.html.twig' with {formSearch: formSearch} only %}
+	<div class="container mt-4">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% if recipes %}
+			<h1>Mes recettes</h1>
+
+			<a href="{{ path('recipe.new') }}" class="btn btn-primary">Créer une recette</a>
+
+
+			<div class="count mt-4">
+				<h4>Il y a
+					{{ recipes|length }}
+					recette(s).</h4>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+
+						<th scope="col">Nom</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Difficulté</th>
+						<th scope="col">Date de création</th>
+						<th scope="col">Edition</th>
+						<th scope="col">Suppression</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for recipe in recipes %}
+
+						<tr class="table-primary">
+
+							<td>{{ recipe.name }}</td>
+							<td>
+								{% if recipe.price is null %}
+									Non renseigné
+								{% else %}
+									{{ recipe.price|number_format(2, '.', ',') }}
+									€
+								{% endif %}
+							</td>
+							<td>
+								{% if recipe.difficulty is null %}
+									Non renseigné
+								{% else %}
+									{{ recipe.difficulty }}
+								{% endif %}
+							</td>
+							<td>{{ recipe.createdAt|date('d/m/y') }}</td>
+							<td>
+								<a href="{{ path('recipe.edit', { id: recipe.id }) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('recipe.delete', { id: recipe.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette recette ?')" class="btn btn-warning">Supprimer</a>
+							</td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="navigation d-flex justify-content-center mt-4"></div>
+		{% else %}
+			<h4>Il n'y a pas de recettes</h4>
+			<a href="{{ path('recipe.new') }}" class="btn btn-primary mt-4">Créer une recette</a>
+		{% endif %}
+
+	</div>
+{% endblock %}

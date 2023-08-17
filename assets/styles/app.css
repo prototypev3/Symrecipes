@@ -1,0 +1,10 @@
+body {
+    background-color: lightgray;
+}
+
+.searchInput {
+    width: 250px;
+    height: 48px;
+    margin-top: 2px;
+}
+
