@@ -40,7 +40,6 @@ class SecurityController extends AbstractController
     #[Route('/logout', 'security.logout')]
     public function logout()
     {
-        // Nothing to do here..
     }
     /**
      * This controller allow us to register 

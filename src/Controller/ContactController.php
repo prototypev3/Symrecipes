@@ -53,7 +53,7 @@ class ContactController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre demande a été envoyée avec succès !'
+                'Votre demande a été envoyée avec succès ! Nous reviendrons vers vous dans les plus brefs délais!'
             );
 
             return $this->redirectToRoute('contact.index');

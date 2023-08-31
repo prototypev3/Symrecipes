@@ -96,6 +96,7 @@ class Recipe
         $this->usersFavorite = new ArrayCollection();
     }
 
+
     #[ORM\PrePersist()]
     public function setUpdatedAtValue()
     {

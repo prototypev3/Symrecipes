@@ -14,11 +14,11 @@
 			</div>
 		{% endfor %}
 
-
-		<div class="recipe__image">
-			<img style="max-width: 500px;" src="{{ vich_uploader_asset(recipe, 'imageFile') }}">
+		<div class="pt-5">
+			<div class="recipe__image">
+				<img style="max-width: 250px;" src="{{ vich_uploader_asset(recipe, 'imageFile') }}">
+			</div>
 		</div>
-
 
 		<h1 class="mt-4">{{ recipe.name }}</h1>
 
@@ -50,19 +50,22 @@
 		</div>
 
 		<div class="mt-4">
-
-			<p>Pour
-				{{ recipe.nbPeople }}
-				personnes</p>
-
-			<p>Nombre de personnes non renseigné</p>
-
+			{% if recipe.nbpeople%}
+				<p>Pour
+					{{ recipe.nbPeople }}
+					personnes</p>
+			{% else %}
+				<p>Nombre de personnes non renseigné</p>
+			{% endif %}
 		</div>
 
 		<div class="mt-4">
 			{% if recipe.price %}
-				<p>Prix (en €) :
-					{{ recipe.price }}</p>
+				<p>Prix :
+
+					{{ recipe.price }}
+					€
+				</p>
 			{% else %}
 				<p>Prix non renseigné</p>
 			{% endif %}
@@ -72,15 +75,30 @@
 			{{ recipe.description|raw }}
 		</div>
 
+
 		<div class="mt-4">
+
 			<p class="mt-4">Ingrédients</p>
 			{% for ingredient in recipe.ingredients %}
 				<span class="badge bg-primary">{{ ingredient.name }}</span>
 			{% endfor %}
+
 		</div>
+
 		<div form="mark">
 			{{ form(form) }}
 			</div>
+
+			<div class="mt-4">
+
+				<p>
+					{#{{ recipe.comment }}#}
+				</p>
+
+				<p>Pas de commentaires</p>
+
+			</div>
+
 
 		</div>
 	{% endblock %}

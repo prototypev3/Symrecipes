@@ -55,7 +55,7 @@ class RecipeController extends AbstractController
             $search->setName($formSearch->get('name')->getData());
             $search->setIdUser($this->getUser()->getId());
 
-            $recipes = $recipeRepository->findBySearchAndUserId($search); // faire cette fonction 
+            $recipes = $recipeRepository->findBySearchAndUserId($search);
 
             return $this->render('pages/recipe/index.html.twig', [
                 'formSearch' => $formSearch->createView(),
@@ -70,6 +70,15 @@ class RecipeController extends AbstractController
             'formSearch' => $formSearch
         ]);
     }
+
+    /**
+     * This controller allows us to see all community's recipes
+     *  @param RecipeRepository $recipeRepository
+     * 
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
 
     #[Route('/recette/communaute', 'recipe.community', methods: ['GET'])]
     public function indexPublic(
@@ -268,4 +277,59 @@ class RecipeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    /**
+     * This controller allow us to comment a public recipe
+     *
+     * @param Recipe $recipe
+     * @param Comment $comment
+     * @return Response
+     */
+
+    // #[Route('/recette/{id}', 'recipe.show', methods: ['GET', 'POST'])]
+
+    // public function Comments(
+    //     Recipe $recipe,
+    //     Request $request,
+    //     Comment $comment,
+
+    //     EntityManagerInterface $manager
+    // ): Response {
+    //     $comment = new Comment();
+    //     $form = $this->createForm(CommentType::class, $comment);
+
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $comment->setUser($this->getUser())
+    //             ->setRecipe($recipe);
+
+    //         $existingComment = $commentRepository->findOneBy([
+    //             'user' => $this->getUser(),
+    //             'recipe' => $recipe,
+    //             'comment' => $comment,
+    //         ]);
+
+    //         if (!$existingComment) {
+    //             $manager->persist($coment);
+    //         } else {
+    //             $existingComment->setcomment(
+    //                 $form->getData()->getComment()
+    //             );
+    //         }
+
+    //         $manager->flush();
+
+    //         $this->addFlash(
+    //             'success',
+    //             'Votre commentaire a été pris en compte.'
+    //         );
+
+    //         return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
+    //     }
+
+    //     return $this->render('pages/recipe/show.html.twig', [
+    //         'recipe' => $recipe,
+    //         'comment' => $comment,
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 }

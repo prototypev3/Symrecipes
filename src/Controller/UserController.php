@@ -36,7 +36,7 @@ class UserController extends AbstractController
         UserRepository $repository,
         int $id,
         Request $request,
-        EntityManagerinterface $manager,
+        EntityManagerInterface $manager,
         UserPasswordHasherInterface $hasher
     ): Response {
 

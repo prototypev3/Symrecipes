@@ -7,13 +7,20 @@
 	{% include 'components/_search_data.html.twig' with {formSearch: formSearch} only %}
 	<div class="container mt-4">
 		<div class="jumbotron">
-			<h1 class="display-4">Bienvenue sur SymRecipe</h1>
+			<h1 class="display-4">Bienvenue sur SymRecipe
+
+				{% if app.user %}
+					{{( app.user.fullname )}}</h1>
+				{% else %}
+			{% endif %}
 			<p class="lead">SymRecipe est un site  qui va te permettre de créer des recettes à base d'ingrédients que tu auras toi-même créer. Tu pourras partager tes recettes à la communauté du site, ou bien les garder en privées.</p>
 			<hr class="my-4">
-			<p>Pour commencer, rendez-vous sur la page d'inscription.</p>
-			<a class="btn btn-primary btn-lgz" href="{{ path('security.registration') }}" role="button">Inscription</a>
-		</div>
+			{% if not app.user%}
+				<p>Pour commencer, rendez-vous sur la page d'inscription.</p>
 
+				<a class="btn btn-primary btn-lgz" href="{{ path('security.registration') }}" role="button">Inscription</a>
+			</div>
+		{% endif %}
 		<div class="recipes">
 			<h2 class="mt-4">Recettes de la communauté</h2>
 			<div class="d-flex justify-content-between">

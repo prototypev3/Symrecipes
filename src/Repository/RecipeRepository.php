@@ -104,4 +104,26 @@ class RecipeRepository extends ServiceEntityRepository
         // $recipes = $this->$paginatorInterface->paginate($recipes, $searchData->getPage(), 9);
         // return $pagination;
     }
+
+    /**
+     * Get published comments for public recipes
+     *
+     * @param Comment $comment
+     * @return PaginationInterface
+     */
+
+    // public function findComment(Comment $comment): array
+    // {
+
+    //     $query = $this->createQueryBuilder('c')
+    //         ->where('c.name LIKE :comment')
+    //         ->andWhere('c.user = :user')
+    //         ->setParameter('name', '%' . $comment->getName() . '%')
+    //         ->setParameter('user', $comment->getIdUser());
+
+
+    //     return $query
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 }

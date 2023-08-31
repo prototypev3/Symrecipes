@@ -71,6 +71,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->marks = new ArrayCollection();
         $this->isFavorite = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->id . ' - ' . $this->fullName;
+    }
+
 
     public function getId(): ?int
     {
